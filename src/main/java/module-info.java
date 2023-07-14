@@ -3,6 +3,8 @@ module co.edu.uniquindio.electroquindio.main {
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
+    requires java.logging;
+    requires java.desktop;
 
     opens co.edu.uniquindio.electroquindio.main to javafx.fxml;
     exports co.edu.uniquindio.electroquindio.main;
