@@ -139,6 +139,8 @@ public class DispositivoController implements Initializable {
 
         if(procesamiento != null){
             System.out.println("Todo esta bien.");
+        }else{
+            System.out.println("f");
         }
     }
 

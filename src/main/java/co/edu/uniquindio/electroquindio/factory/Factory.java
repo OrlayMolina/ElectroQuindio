@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Factory {
 
-    private Almacen almacen;
+    private Almacen almacen = new Almacen();
 
     public static class SingletonHolder {
         private final static Factory eINSTANCE = new Factory();
