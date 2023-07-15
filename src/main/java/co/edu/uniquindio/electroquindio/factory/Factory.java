@@ -22,7 +22,7 @@ public class Factory {
     }
 
     public Factory() {
-
+        cargarDatos();
     }
 
     public void cargarDatos(){
@@ -33,7 +33,7 @@ public class Factory {
             procesamiento = persistencia.cargarProcesamiento();
             getAlmacen().getListaProcesamientos().addAll(procesamiento);
         }catch(Exception e){
-            System.out.println("f");
+            e.printStackTrace();
         }
 
     }
@@ -43,8 +43,11 @@ public class Factory {
 
         try{
             procesamiento = getAlmacen().crearDispositivo(proc);
+            persistencia.guardarDispositivo(getListProcesamientos());
         }catch(DispositivoElectronicoExisteException e){
             System.out.println("Ya existe un dispositivo electrónico registrado con esa Referencia.");
+        }catch(IOException ex){
+            System.out.println("Ha ocurrido un error de archivo.");
         }
 
         return procesamiento;
@@ -54,7 +57,8 @@ public class Factory {
         return almacen;
     }
 
-    public void setAlmacen(Almacen almacen) {
-        this.almacen = almacen;
+
+    public ArrayList<Procesamiento> getListProcesamientos() {
+        return getAlmacen().getListaProcesamientos();
     }
 }

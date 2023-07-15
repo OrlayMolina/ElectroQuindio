@@ -15,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,7 +28,9 @@ public class DispositivoController implements Initializable {
     private final ObservableList<TipoColor> listadoColores = FXCollections.observableArrayList();
     private final ObservableList<TipoProcesador> listadoProcesadores = FXCollections.observableArrayList();
     private final ObservableList<TipoSistemaOperativo> listadoSistemaOperativo = FXCollections.observableArrayList();
+    private final ObservableList<Procesamiento> listaProcesamientos = FXCollections.observableArrayList();
 
+    private Procesamiento procesamiento;
     private DispositivoSubController subController;
 
     @FXML
@@ -138,9 +141,8 @@ public class DispositivoController implements Initializable {
         procesamiento = subController.crearDispositivo(proc);
 
         if(procesamiento != null){
-            System.out.println("Todo esta bien.");
-        }else {
-            System.out.println("f");
+            listaProcesamientos.add(procesamiento);
+            tableDispositivos.refresh();
         }
     }
 
@@ -188,21 +190,6 @@ public class DispositivoController implements Initializable {
         cmbSistemaOperativo.setItems(listadoSistemaOperativo);
     }
 
-    /**
-     *
-     */
-    public void datosIniciales(){
-        Factory factory = Factory.getInstance();
-        subController = new DispositivoSubController(factory);
-        new DispositivoController();
-
-        mostrarCategoria();
-        mostrarMarcas();
-        mostrarColor();
-        mostrarMarcarProcesamiento();
-        mostrarSistemaOperativo();
-    }
-
 
 
     @FXML
@@ -222,6 +209,69 @@ public class DispositivoController implements Initializable {
         cmbProcesador.setValue(null);
         cmbSistemaOperativo.setValue(null);
         txMemoria.setText("");
+    }
+
+    public ObservableList<Procesamiento> getProcesamientos() {
+        listaProcesamientos.addAll(subController.obtenerProcesamientos());
+        return listaProcesamientos;
+    }
+
+    private void mostrarInformacionSerie(Procesamiento proc) {
+        if(proc != null) {
+
+            cmbCategoria.setValue(proc.getCategoria());
+            cmbMarca.setValue(proc.getMarca());
+            txModelo.setText(proc.getModelo());
+            txReferencia.setText(proc.getReferencia());
+            txPantalla.setText(proc.getTamanioPantalla());
+            cmbColor.setValue(proc.getColor());
+            txPrecio.setText(String.valueOf(proc.getPrecio()));
+            cmbProcesador.setValue(proc.getMarcaProcesador());
+            cmbSistemaOperativo.setValue(proc.getSistemaOperativo());
+            txMemoria.setText(proc.getMemoria());
+        }
+    }
+
+    private void inicializarProcesamientosView() {
+
+        colCategoria.setCellValueFactory(new PropertyValueFactory<>("tipoCategoria"));
+        colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        colModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
+        colReferencia.setCellValueFactory(new PropertyValueFactory<>("referencia"));
+        colPantalla.setCellValueFactory(new PropertyValueFactory<>("tamanioPantalla"));
+        colProcesador.setCellValueFactory(new PropertyValueFactory<>("marcaProcesador"));
+        colSistemaOperativo.setCellValueFactory(new PropertyValueFactory<>("sistemaOperativo"));
+        colMemoria.setCellValueFactory(new PropertyValueFactory<>("memoria"));
+
+        tableDispositivos.getItems().clear();
+        tableDispositivos.setItems(getProcesamientos());
+
+        tableDispositivos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+
+            procesamiento = (Procesamiento) newSelection;
+
+            mostrarInformacionSerie(procesamiento);
+
+        });
+
+    }
+
+
+
+    /**
+     *
+     */
+    public void datosIniciales(){
+        Factory factory = Factory.getInstance();
+        subController = new DispositivoSubController(factory);
+        new DispositivoController();
+        inicializarProcesamientosView();
+        mostrarCategoria();
+        mostrarMarcas();
+        mostrarColor();
+        mostrarMarcarProcesamiento();
+        mostrarSistemaOperativo();
+
     }
 
     @Override

@@ -11,6 +11,10 @@ public class DispositivoSubController {
     private Factory factory;
     private Almacen almacen;
 
+    public ArrayList<Procesamiento> obtenerProcesamientos(){
+        return factory.getListProcesamientos();
+    }
+
     public DispositivoSubController(Factory factory) {
         this.factory = factory;
         almacen = factory.getAlmacen();

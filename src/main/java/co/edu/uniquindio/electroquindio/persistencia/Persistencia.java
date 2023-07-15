@@ -45,15 +45,15 @@ public class Persistencia {
                 Procesamiento procesamiento = new Procesamiento();
 
                 procesamiento.setReferencia(linea.split("##")[0]);
-                procesamiento.setCategoria(TipoCategoria.valueOf(linea.split("##")[0]));
-                procesamiento.setMarca(TipoMarca.valueOf(linea.split("##")[0]));
-                procesamiento.setModelo(linea.split("##")[0]);
-                procesamiento.setTamanioPantalla(linea.split("##")[0]);
-                procesamiento.setColor(TipoColor.valueOf(linea.split("##")[0]));
-                procesamiento.setPrecio(Integer.parseInt(linea.split("##")[0]));
-                procesamiento.setMarcaProcesador(TipoProcesador.valueOf(linea.split("##")[0]));
-                procesamiento.setSistemaOperativo(TipoSistemaOperativo.valueOf(linea.split("##")[0]));
-                procesamiento.setMemoria(linea.split("##")[0]);
+                procesamiento.setCategoria(TipoCategoria.valueOf(linea.split("##")[1]));
+                procesamiento.setMarca(TipoMarca.valueOf(linea.split("##")[2]));
+                procesamiento.setModelo(linea.split("##")[3]);
+                procesamiento.setTamanioPantalla(linea.split("##")[4]);
+                procesamiento.setColor(TipoColor.valueOf(linea.split("##")[5]));
+                procesamiento.setPrecio(Integer.parseInt(linea.split("##")[6]));
+                procesamiento.setMarcaProcesador(TipoProcesador.valueOf(linea.split("##")[7]));
+                procesamiento.setSistemaOperativo(TipoSistemaOperativo.valueOf(linea.split("##")[8]));
+                procesamiento.setMemoria(linea.split("##")[9]);
 
                 proces.add(procesamiento);
 

@@ -65,7 +65,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                co.edu.uniquindio.electroquindio.main/co.edu.uniquindio.electroquindio.main.HelloApplication
+                                co.edu.uniquindio.electroquindio.main/co.edu.uniquindio.electroquindio.main.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
