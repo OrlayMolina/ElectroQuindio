@@ -1,8 +1,10 @@
 package co.edu.uniquindio.electroquindio.controlador;
 
+import co.edu.uniquindio.electroquindio.constantes.MensajeInformacionConstante;
 import co.edu.uniquindio.electroquindio.enumm.*;
 import co.edu.uniquindio.electroquindio.factory.Factory;
 import co.edu.uniquindio.electroquindio.modelo.Procesamiento;
+import co.edu.uniquindio.electroquindio.persistencia.Persistencia;
 import co.edu.uniquindio.electroquindio.subcontrolador.DispositivoSubController;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -10,15 +12,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DispositivoController implements Initializable {
@@ -32,6 +31,11 @@ public class DispositivoController implements Initializable {
 
     private Procesamiento procesamiento;
     private DispositivoSubController subController;
+    private Persistencia persistencia = new Persistencia();
+    private MensajeInformacionConstante mensajeInformacion = new MensajeInformacionConstante();
+
+    @FXML
+    private Button btnSalir;
 
     @FXML
     private Button btnActualizarDispositivo;
@@ -103,8 +107,18 @@ public class DispositivoController implements Initializable {
     private TextField txReferencia;
 
     @FXML
-    void actualizarDispositivo(ActionEvent event) {
+    void cerrarAplicacion(ActionEvent event) {
+        System.exit(0);
+    }
 
+    @FXML
+    void actualizarDispositivo(ActionEvent event) {
+        actualizarProcesamientos();
+    }
+
+    @FXML
+    void eliminarDispositivo(ActionEvent event) {
+        eliminarProcesamientos();
     }
 
     @FXML
@@ -143,6 +157,72 @@ public class DispositivoController implements Initializable {
         if(procesamiento != null){
             listaProcesamientos.add(procesamiento);
             tableDispositivos.refresh();
+            mostrarMensaje("GUARDAR","Creación de procesamiento.",
+                    mensajeInformacion.INFOMACION_DISPOSITIVO_ACTUALIZADO, Alert.AlertType.INFORMATION);
+            persistencia.guardarArchivoLog("Se guardado un dispositivo correctamente", 1, "La acción se ejecuto desde el método guardarDispositvo de DispositivoController.");
+
+        }
+    }
+
+    public void eliminarProcesamientos(){
+        boolean bandera = false, mensaje;
+        if(procesamiento != null){
+            mensaje = mostrarMensajeConfirmacion("¿Está seguro que desea eliminar el procesamiento?.");
+            if(mensaje){
+                bandera = subController.eliminarDispositivo(procesamiento);
+                if(bandera){
+                    listaProcesamientos.remove(procesamiento);
+                    // Procesamiento va a ser igual al null.
+                    procesamiento = null;
+                    tableDispositivos.getSelectionModel().clearSelection();
+                    mostrarMensaje("ELIMINACIÓN","Eliminación de procesamiento",
+                            "El procesamiento se ha eliminado correctamente", Alert.AlertType.INFORMATION);
+                }else {
+                    mostrarMensaje("ELIMINACIÓN","Eliminación de procesamiento.",
+                            "El procesamiento no se pudo eliminar.", Alert.AlertType.WARNING);
+                }
+            }
+        }
+
+    }
+
+    public void actualizarProcesamientos(){
+        Procesamiento proc = new Procesamiento();
+        boolean bandera = false;
+
+        String referencia = txReferencia.getText();
+        TipoCategoria tipoCategoria = cmbCategoria.getSelectionModel().getSelectedItem();
+        TipoMarca marca = cmbMarca.getSelectionModel().getSelectedItem();
+        String modelo = txModelo.getText();
+        String tamanioPantalla = txPantalla.getText();
+        TipoColor color = cmbColor.getSelectionModel().getSelectedItem();
+        int precio = Integer.parseInt(txPrecio.getText());
+        TipoProcesador procesador = cmbProcesador.getSelectionModel().getSelectedItem();
+        TipoSistemaOperativo sistemaOperativo = cmbSistemaOperativo.getSelectionModel().getSelectedItem();
+        String memoria = txMemoria.getText();
+
+        proc.setCategoria(tipoCategoria);
+        proc.setReferencia(referencia);
+        proc.setMarca(marca);
+        proc.setModelo(modelo);
+        proc.setTamanioPantalla(tamanioPantalla);
+        proc.setColor(color);
+        proc.setPrecio(precio);
+        proc.setMarcaProcesador(procesador);
+        proc.setSistemaOperativo(sistemaOperativo);
+        proc.setMemoria(memoria);
+
+        if(procesamiento != null){
+            bandera = subController.actualizarDispositivo(proc);
+            if(bandera){
+                tableDispositivos.refresh();
+                mostrarMensaje("ACTUALIZACIÓN","Actualización de procesamiento.",
+                        "El procesamiento se actualizó correctamente.", Alert.AlertType.INFORMATION);
+                tableDispositivos.refresh();
+            }else {
+                mostrarMensaje("ACTUALIZACIÓN","Actualización de procesamiento.",
+                        "El procesamiento no se pudo actualizar.", Alert.AlertType.WARNING);
+            }
         }
     }
 
@@ -159,8 +239,9 @@ public class DispositivoController implements Initializable {
         listadoMarcas.add(TipoMarca.HUAWEI);
         listadoMarcas.add(TipoMarca.HEWLETT_PACKARD);
         listadoMarcas.add(TipoMarca.LENOVO);
+        listadoMarcas.add(TipoMarca.MAC);
         listadoMarcas.add(TipoMarca.MOTOROLA);
-        listadoMarcas.add(TipoMarca.MOTOROLA);
+        listadoMarcas.add(TipoMarca.NOKIA);
         listadoMarcas.add(TipoMarca.SAMSUNG);
         cmbMarca.setItems(listadoMarcas);
     }
@@ -180,21 +261,84 @@ public class DispositivoController implements Initializable {
 
     public void mostrarMarcarProcesamiento(){
         listadoProcesadores.add(TipoProcesador.AMD);
+        listadoProcesadores.add(TipoProcesador.APPLE_16);
+        listadoProcesadores.add(TipoProcesador.HUAWEI_KIRIN);
         listadoProcesadores.add(TipoProcesador.INTEL);
+        listadoProcesadores.add(TipoProcesador.MOTOROLA_MEDIATEK);
+        listadoProcesadores.add(TipoProcesador.NOKIA_MEDIATEK);
+        listadoProcesadores.add(TipoProcesador.SAMSUNG_EXYNOS);
         cmbProcesador.setItems(listadoProcesadores);
     }
 
     public void mostrarSistemaOperativo(){
         listadoSistemaOperativo.add(TipoSistemaOperativo.ANDROID);
+        listadoSistemaOperativo.add(TipoSistemaOperativo.IOS);
+        listadoSistemaOperativo.add(TipoSistemaOperativo.LINUX);
         listadoSistemaOperativo.add(TipoSistemaOperativo.MAC_OS);
+        listadoSistemaOperativo.add(TipoSistemaOperativo.WINDOWS);
         cmbSistemaOperativo.setItems(listadoSistemaOperativo);
     }
 
 
-
     @FXML
-    void eliminarDispositivo(ActionEvent event) {
+    public void filtroEnumMarca(){
+        filtro();
+    }
 
+    public void filtro(){
+
+
+        TipoCategoria tipoCategoria = cmbCategoria.getSelectionModel().getSelectedItem();
+        if(tipoCategoria.equals(TipoCategoria.COMPUTADOR)){
+            listadoProcesadores.clear();
+
+            listadoProcesadores.add(TipoProcesador.AMD);
+            listadoProcesadores.add(TipoProcesador.INTEL);
+            cmbProcesador.setItems(listadoProcesadores);
+
+            listadoMarcas.clear();
+            listadoMarcas.add(TipoMarca.ACER);
+            listadoMarcas.add(TipoMarca.ASUS);
+            listadoMarcas.add(TipoMarca.HEWLETT_PACKARD);
+            listadoMarcas.add(TipoMarca.LENOVO);
+            listadoMarcas.add(TipoMarca.MAC);
+            cmbMarca.setItems(listadoMarcas);
+
+            listadoSistemaOperativo.clear();
+
+            listadoSistemaOperativo.add(TipoSistemaOperativo.LINUX);
+            listadoSistemaOperativo.add(TipoSistemaOperativo.MAC_OS);
+            listadoSistemaOperativo.add(TipoSistemaOperativo.WINDOWS);
+            cmbSistemaOperativo.setItems(listadoSistemaOperativo);
+
+
+        }
+
+        if(tipoCategoria.equals(TipoCategoria.CELULAR)){
+            listadoProcesadores.clear();
+
+            listadoProcesadores.add(TipoProcesador.APPLE_16);
+            listadoProcesadores.add(TipoProcesador.HUAWEI_KIRIN);
+            listadoProcesadores.add(TipoProcesador.MOTOROLA_MEDIATEK);
+            listadoProcesadores.add(TipoProcesador.NOKIA_MEDIATEK);
+            listadoProcesadores.add(TipoProcesador.SAMSUNG_EXYNOS);
+            cmbProcesador.setItems(listadoProcesadores);
+
+            listadoMarcas.clear();
+
+            listadoMarcas.add(TipoMarca.APPLE);
+            listadoMarcas.add(TipoMarca.HUAWEI);;
+            listadoMarcas.add(TipoMarca.MOTOROLA);
+            listadoMarcas.add(TipoMarca.NOKIA);
+            listadoMarcas.add(TipoMarca.SAMSUNG);
+            cmbMarca.setItems(listadoMarcas);
+
+            listadoSistemaOperativo.clear();
+
+            listadoSistemaOperativo.add(TipoSistemaOperativo.ANDROID);
+            listadoSistemaOperativo.add(TipoSistemaOperativo.IOS);;
+            cmbSistemaOperativo.setItems(listadoSistemaOperativo);
+        }
     }
 
     @FXML
@@ -234,7 +378,7 @@ public class DispositivoController implements Initializable {
 
     private void inicializarProcesamientosView() {
 
-        colCategoria.setCellValueFactory(new PropertyValueFactory<>("tipoCategoria"));
+        colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
         colModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
         colReferencia.setCellValueFactory(new PropertyValueFactory<>("referencia"));
@@ -256,7 +400,29 @@ public class DispositivoController implements Initializable {
 
     }
 
+    public boolean mostrarMensajeConfirmacion(String mensaje) {
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Confirmacion");
+        alert.setContentText(mensaje);
+        Optional<ButtonType> action = alert.showAndWait();
+
+        if (action.get() == ButtonType.OK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+
+        Alert aler = new Alert(alertType);
+        aler.setTitle(titulo);
+        aler.setHeaderText(header);
+        aler.setContentText(contenido);
+        aler.showAndWait();
+    }
 
     /**
      *

@@ -8,6 +8,7 @@ public enum TipoMarca {
     HUAWEI,
     HEWLETT_PACKARD,
     LENOVO,
+    MAC,
     MOTOROLA,
     NOKIA,
     SAMSUNG

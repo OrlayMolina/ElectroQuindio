@@ -23,4 +23,14 @@ public class DispositivoSubController {
     public Procesamiento crearDispositivo(Procesamiento proc) {
         return factory.crearDispositivo(proc);
     }
+
+    public boolean eliminarDispositivo(Procesamiento proc) {
+        return factory.eliminarDispositivo(proc);
+    }
+
+    public boolean actualizarDispositivo(Procesamiento proc) {
+        return factory.actualizarDispositivo(proc);
+    }
+
+
 }

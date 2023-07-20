@@ -13,6 +13,12 @@ public class Persistencia {
 
     public static final String rutaDispositivo = "C:\\Java proyectos\\ElectroQuindio\\src\\main\\java\\co\\edu\\uniquindio\\electroquindio\\archivos\\ProcesamientosFile.txt";
 
+    public static final String rutaLog = "C:\\Java proyectos\\ElectroQuindio\\src\\main\\java\\co\\edu\\uniquindio\\electroquindio\\archivos\\SistemaLog.txt";
+
+    public void guardarArchivoLog(String mensajeLog, int nivel, String accion){
+        archivoUtil.guardarRegistroLog(mensajeLog, nivel, accion, rutaLog);
+    }
+
     public void guardarDispositivo(ArrayList<Procesamiento> listaProcesamientos) throws IOException {
 
         StringBuilder contenido = new StringBuilder();
@@ -27,7 +33,7 @@ public class Persistencia {
                     append(p.getPrecio()).append("##").
                     append(p.getMarcaProcesador()).append("##").
                     append(p.getSistemaOperativo()).append("##").
-                    append(p.getMemoria()).append("##").append("\n");
+                    append(p.getMemoria()).append("\n");
         }
 
         archivoUtil.guardarArchivo(rutaDispositivo, contenido.toString(), false);

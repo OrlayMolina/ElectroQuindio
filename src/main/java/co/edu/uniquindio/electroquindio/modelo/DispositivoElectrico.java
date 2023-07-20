@@ -7,7 +7,7 @@ import co.edu.uniquindio.electroquindio.enumm.TipoMarca;
 public abstract class DispositivoElectrico {
 
     // atributos privados
-    private TipoCategoria tipoCategoria;
+    private TipoCategoria categoria;
 
     private TipoMarca marca;
 
@@ -28,11 +28,11 @@ public abstract class DispositivoElectrico {
     }
 
     public TipoCategoria getCategoria() {
-        return tipoCategoria;
+        return categoria;
     }
 
-    public void setCategoria(TipoCategoria tipoCategoria) {
-        this.tipoCategoria = tipoCategoria;
+    public void setCategoria(TipoCategoria categoria) {
+        this.categoria = categoria;
     }
 
     public TipoMarca getMarca() {

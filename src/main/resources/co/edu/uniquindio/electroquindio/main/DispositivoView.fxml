@@ -35,7 +35,7 @@
                 <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ComboBox fx:id="cmbCategoria" prefWidth="150.0" promptText="Elija la Categoria" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <ComboBox fx:id="cmbCategoria" onAction="#filtroEnumMarca" prefWidth="150.0" promptText="Elija la Categoria" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 <Label text="Categoria:" GridPane.columnIndex="2" />
                 <Label text="Marca:" GridPane.columnIndex="4" />
                 <ComboBox fx:id="cmbMarca" prefHeight="25.0" prefWidth="137.0" promptText="Elija la marca" GridPane.columnIndex="4" GridPane.rowIndex="1" />
@@ -65,10 +65,10 @@
         </ImageView>
         <TableView fx:id="tableDispositivos" layoutX="35.0" layoutY="327.0" prefHeight="189.0" prefWidth="692.0">
             <columns>
+                <TableColumn fx:id="colReferencia" prefWidth="95.0" text="Referencia" />
                 <TableColumn fx:id="colCategoria" prefWidth="84.0" text="Categoria" />
                 <TableColumn fx:id="colMarca" prefWidth="78.0" text="Marca" />
                 <TableColumn fx:id="colModelo" prefWidth="64.0" text="Modelo" />
-                <TableColumn fx:id="colReferencia" prefWidth="95.0" text="Referencia" />
                 <TableColumn fx:id="colPantalla" prefWidth="70.0" text="Pantalla" />
                 <TableColumn fx:id="colProcesador" prefWidth="104.0" text="Procesador" />
                 <TableColumn fx:id="colSistemaOperativo" prefWidth="92.0" text="S.O." />
@@ -79,7 +79,7 @@
           <Button fx:id="btnActualizarDispositivo" layoutX="265.0" layoutY="284.0" mnemonicParsing="false" onAction="#actualizarDispositivo" text="Actualizar" />
           <Button fx:id="btnEliminarDispositivo" layoutX="407.0" layoutY="284.0" mnemonicParsing="false" onAction="#eliminarDispositivo" text="   Eliminar   " />
           <Button fx:id="btnLimpiarDatosDispositivo" layoutX="550.0" layoutY="284.0" mnemonicParsing="false" onAction="#limpiarCampos" text="   Limpiar   " />
-      <Button layoutX="678.0" layoutY="25.0" mnemonicParsing="false">
+      <Button fx:id="btnSalir" layoutX="678.0" layoutY="25.0" mnemonicParsing="false" onAction="#cerrarAplicacion">
          <graphic>
             <ImageView fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>

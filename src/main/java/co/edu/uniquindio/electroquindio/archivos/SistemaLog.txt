@@ -1,0 +1,46 @@
+jul 16, 2023 3:52:49 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-16
+jul 16, 2023 3:54:37 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-16
+jul 16, 2023 9:19:15 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-16
+jul 16, 2023 9:19:41 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: La acción se ejecuto desde el método guardarDispositvo de DispositivoController.,Se guardado un dispositivo correctamente,2023-07-16
+jul 18, 2023 7:28:49 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-18
+jul 18, 2023 7:29:45 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+WARNING: Dispositivo se ha creado con exitosamente,Se ha creado un nuevo dispositivo en el sistema,2023-07-18
+jul 18, 2023 7:29:45 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: La acción se ejecuto desde el método guardarDispositvo de DispositivoController.,Se guardado un dispositivo correctamente,2023-07-18
+jul 18, 2023 7:48:48 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-18
+jul 18, 2023 7:49:42 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+WARNING: El dispositivo se ha guardado exitosamente.,Se ha creado un nuevo dispositivo en el sistema,2023-07-18
+jul 18, 2023 7:49:42 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: La acción se ejecuto desde el método guardarDispositvo de DispositivoController.,Se guardado un dispositivo correctamente,2023-07-18
+jul 18, 2023 7:54:17 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-18
+jul 18, 2023 9:12:30 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-18
+jul 18, 2023 9:13:25 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Dispositivo se ha actualizado con éxito,Se ha actualizado un dispositivo,2023-07-18
+jul 18, 2023 9:57:17 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-18
+jul 19, 2023 7:30:13 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-19
+jul 19, 2023 7:36:56 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-19
+jul 19, 2023 7:43:33 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-19
+jul 19, 2023 7:48:56 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-19
+jul 19, 2023 7:51:15 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-19
+jul 19, 2023 7:52:55 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-19
+jul 19, 2023 7:58:56 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-19
+jul 19, 2023 8:00:59 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-19
+jul 19, 2023 8:01:43 P. M. co.edu.uniquindio.electroquindio.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Se ha cargado la aplicación exitosamente.,Se ha cargado la aplicación,2023-07-19
